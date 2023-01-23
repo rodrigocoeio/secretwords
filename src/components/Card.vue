@@ -1,19 +1,19 @@
 <template>
     <div class="CardBox">
-        <button :class="['TipButton', 'btn', tipsPlayed[tip] ? 'btn-primary' : 'btn-success']"
-            v-for="tip, index in card.tips" @click="playTip(tip)">
-            Tip {{ index + 1 }}
-            <img src="/images/audio.png" height="36">
+        <button class="LetterButton btn btn-success" @click="openLetter(letter)"
+            v-for="letter, index in letters">
+            {{ letter }}
         </button>
 
         <hr>
 
-        <img src="/images/whatami-cover.png" class="CardCover" @click="openCard" v-if="!opened">
-
-        <div class="Card" v-if="opened" @click="playCard">
-            <h1>{{ card.name }}</h1>
-            <img :src="cardImage" class="CardImage">
+        <div class="Word" v-for="word in cardWords">
+            <span class="Letter" v-for="letter in word">
+                {{  letter }}
+            </span>
+            <div style="clear:both;"></div>
         </div>
+
     </div>
 </template>
 
@@ -21,17 +21,32 @@
 import store from "$/store.js";
 
 export default {
+    data() {
+        return {
+            letters: ['A','B','C','D','E','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','X','W','Y','Z'],
+            openLetters: []
+        }
+    },
+
     computed: {
         card() {
             return store.card;
         },
 
-        cardImage() {
-            return "/cards/" + store.currentCategory.name + "/" + this.card.image;
+        cardWords() {
+            const words = this.card.name.split(" ");
+
+            words.forEach((word,index) => {
+                const letters = word.split("");
+
+                words[index] = letters;
+            });
+
+            return words;
         },
 
-        tipsPlayed() {
-            return store.game.tipsPlayed;
+        cardImage() {
+            return "/cards/" + store.currentCategory.name + "/" + this.card.image;
         },
 
         opened() {
@@ -40,8 +55,8 @@ export default {
     },
 
     methods: {
-        playTip(tip) {
-            return store.playTip(tip);
+        openLetter(letter) {
+            playAudio("/audios/letters/" + letter.toLowerCase() +".mp3");
         },
 
         openCard() {
@@ -56,27 +71,24 @@ export default {
 </script>
 
 <style scoped>
-.CardBox {
-    height: calc(100% - 100px);
+.Letter {
+    padding:5px;
+    font-size:36px;
+    margin: 15px;
+    border: 1px solid gray;
+    text-align: center;
+    width: 50px;
+    display: inline-block;
 }
 
-.Card {
-    height: calc(100% - 150px);
-    cursor: pointer;
+.Word {
+    clear: both;
+    width: auto;
+    margin: auto 0;
 }
 
-.CardCover {
-    cursor: pointer;
-}
 
-.CardImage {
-    object-fit: contain;
-    height: 100%;
-    margin: auto;
-    overflow: hidden;
-}
-
-.TipButton {
+.LetterButton {
     margin-right: 5px;
 }
 </style>

@@ -9,8 +9,6 @@
       <option value="shuffle">Shuffle Cards</option>
     </select>
 
-    <input type="password" class="form form-text">
-
     <category-select :categories="categories"></category-select>
 
     <button class="btn btn-primary" @click="startGame">Start Game</button>

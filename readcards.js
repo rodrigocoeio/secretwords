@@ -132,30 +132,19 @@ const getCategory = (content, parent) => {
   return {
     type: "category",
     name: content.name,
-    cover: false,
     parent: parent ? parent.parent : "",
   };
 };
 
 const getCard = (content, parent) => {
-  if (content.extension == "jpg" || content.extension == "png") {
+  if (content.extension == "txt") {
     const cardName = formatCardName(content.name);
-    const cardType =
-      formatCardName(parent.name).toLowerCase() == cardName.toLowerCase()
-        ? "cover"
-        : "card";
-    const cardImage = content.fileName;
-    const cardAudio = findCardFile(content.name, parent, "mp3");
-    const cardTips = getCardTips(content, parent);
 
     return {
-      type: cardType,
+      type: "card",
       name: cardName,
       category: parent.name,
       parent: content.parent,
-      image: cardImage,
-      audio: cardAudio,
-      tips: cardTips,
     };
   }
 

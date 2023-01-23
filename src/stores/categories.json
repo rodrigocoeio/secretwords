@@ -1,1 +1,1 @@
-{}
+{"fruits":{"type":"category","name":"fruits","parent":"","cover":false,"categories":{},"cards":[{"type":"card","name":"Apple","category":"fruits","parent":"fruits"},{"type":"card","name":"I ate an apple today","category":"fruits","parent":"fruits"},{"type":"card","name":"Orange","category":"fruits","parent":"fruits"}]}}
