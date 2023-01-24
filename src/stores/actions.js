@@ -41,7 +41,8 @@ export default {
       console.log("Next Card");
 
       this.game.cardIndex++;
-      this.game.opened = false;
+      this.game.openLetters = [];
+      this.game.guessed = false;
     }
   },
 
@@ -50,7 +51,8 @@ export default {
       console.log("Previous Card");
 
       this.game.cardIndex--;
-      this.game.opened = false;
+      this.game.openLetters = [];
+      this.game.guessed = false;
     }
   },
 
