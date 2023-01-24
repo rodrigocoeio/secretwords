@@ -4,7 +4,7 @@ export default {
     this.game.openLetters = [];
     this.game.guessed = false;
     this.game.cardIndex = 0;
-    this.game.typedWord="";
+    this.game.typedWord = "";
   },
 
   quitGame() {

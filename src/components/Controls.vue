@@ -118,10 +118,10 @@ export default {
 
     methods: {
         setTypedWord() {
-            store.game.typedWord = this.typedWord;
-            this.typedWord = "";
             store.startGame();
+            store.game.typedWord = this.typedWord;
             $("#typeWordInput").trigger("blur");
+            this.typedWord = "";
         },
 
         lookTypeWord() {
