@@ -105,6 +105,10 @@ export default {
 </script>
 
 <style scoped>
+.CardBox {
+    padding-left: 100px;
+    padding-right: 100px;
+}
 .TryInput {
     max-width: 200px;
     margin: auto;
