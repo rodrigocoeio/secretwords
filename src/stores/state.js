@@ -8,7 +8,8 @@ export default {
     openLetters: [],
     guessed: false,
     cardIndex: 0,
-    cardSorting: "alpha"
+    cardSorting: "alpha",
+    typedWord: ""
   },
 
   categories

@@ -16,14 +16,34 @@ export default {
 
     return this.currentCategory && this.currentCategory.cards[card_index]
       ? this.currentCategory.cards[card_index]
-      : false;
+      : { name: this.game.typedWord };
   },
 
-  image() {
-    return this.card.image;
+  cardWords() {
+    const words = this.card.name.split(" ");
+    const letters = this.game.letters;
+    const openLetters = this.game.openLetters;
+    const guessed = this.game.guessed;
+
+    words.forEach((word, index) => {
+      const wordLetters = word.split("");
+
+      wordLetters.forEach((wordLetter, index) => {
+        wordLetters[index] = {
+          letter: wordLetter,
+          opened:
+            openLetters.includes(wordLetter.toLowerCase()) || // if letter is already chosed/opened
+            !letters.includes(wordLetter.toLowerCase()),      // if the char is not a letter
+        };
+      });
+
+      words[index] = wordLetters;
+    });
+
+    return words;
   },
 
   cardsNumber() {
     return this.currentCategory ? this.currentCategory.cards.length : 0;
-  }
+  },
 };

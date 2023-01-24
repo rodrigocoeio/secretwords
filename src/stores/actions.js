@@ -1,15 +1,5 @@
 export default {
   startGame() {
-    if (
-      !this.currentCategory ||
-      !this.currentCategory.cards ||
-      this.currentCategory.cards.length === 0
-    ) {
-      alert("Choose a Category or Subcategory");
-      $("#categoryField").trigger("focus");
-      return false;
-    }
-
     this.game.started = true;
     this.game.openLetters = [];
     this.game.guessed = false;
@@ -96,10 +86,28 @@ export default {
   },
 
   openLetter(letter) {
-    playAudio("/audios/letters/" + letter.toLowerCase() + ".mp3");
-
-    if(!this.game.openLetters.includes(letter.toLowerCase()))
+    if (!this.game.openLetters.includes(letter.toLowerCase())) {
       this.game.openLetters.push(letter.toLowerCase());
+    }
+
+    this.playLetterAudio(letter);
+  },
+
+  playLetterAudio(letter) {
+    let foundLetter = false;
+    this.cardWords.forEach((word) => {
+      word.forEach((wordLetter) => {
+        if (wordLetter.letter.toLowerCase() === letter.toLowerCase()) {
+          foundLetter = true;
+        }
+      });
+    });
+
+    if (foundLetter) {
+      playAudio("/audios/letters/" + letter.toLowerCase() + ".mp3");
+    } else {
+      playAudio("/audios/wrong.mpeg");
+    }
   },
 
   playCard() {

@@ -19,11 +19,15 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <!-- Category Name -->
                     <li class="nav-item CategoryName" :title="categoryName">
-                        {{ categoryName }}
+                        {{ categoryName || "Type your words: " }}
+                    </li>
+
+                    <li class="nav-item" v-if="!categoryName">
+                        <input id="typeWordInput" :type="typeWordInputType" class="TypeWordInput form form-control" placeholder="Type your words here" v-model="typedWord" @keydown.enter="setTypedWord" @keydown.ctrl="lookTypeWord">
                     </li>
 
                     <!-- Previous Card -->
-                    <li class="nav-item">
+                    <li class="nav-item" v-if="categoryName">
                         <button id="previousCardButton" class="btn btn-warning" :disabled="cardIndex == 0"
                             @click="previousCard">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
@@ -35,13 +39,13 @@
                         </button>
                     </li>
 
-                    <li class="CardIndex nav-item">
+                    <li class="CardIndex nav-item" v-if="categoryName">
                         &nbsp;&nbsp;
                         {{ cardsNumber > 0 ? cardIndex + 1 : 0 }} / {{ cardsNumber }}
                     </li>
 
                     <!-- Next Card -->
-                    <li class="nav-item">
+                    <li class="nav-item" v-if="categoryName">
                         <button id="nextCardButton" class="btn btn-success" :disabled="((cardIndex + 1) >= cardsNumber)"
                             @click.stop.prevent="nextCard">
                             Next Card
@@ -79,7 +83,9 @@ import store from "$/store";
 export default {
     data() {
         return {
-            configs: store.configs
+            configs: store.configs,
+            typedWord: "",
+            typeWordInputType: "password"
         }
     },
 
@@ -105,25 +111,21 @@ export default {
         }
     },
 
+    mounted() {
+        if($("#typeWordInput").is(":visible"))
+            $("#typeWordInput").trigger("focus");
+    },
+
     methods: {
-        playAudio() {
-            $("#audioButton").trigger("blur");
-            store.playCardAudio();
+        setTypedWord() {
+            store.game.typedWord = this.typedWord;
+            this.typedWord = "";
+            store.startGame();
+            $("#typeWordInput").trigger("blur");
         },
 
-        toggleImage() {
-            $("#imageButton").trigger("blur");
-            this.game.image = !this.game.image;
-        },
-
-        toggleName() {
-            $("#nameButton").trigger("blur");
-            this.game.name = !this.game.name;
-        },
-
-        toggleTranslation() {
-            $("#translationButton").trigger("blur");
-            this.game.translation = !this.game.translation;
+        lookTypeWord() {
+            this.typeWordInputType = this.typeWordInputType === "text" ? "password" : "text";
         },
 
         previousCard() {

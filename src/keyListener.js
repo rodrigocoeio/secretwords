@@ -2,9 +2,9 @@ import store from "$/store";
 
 const listenKeyBoardEvents = function (e) {
   if (store.game.started) {
-    if(store.game.letters.includes(e.key))
+    if(!$('#typeWordInput').is(':focus') && store.game.letters.includes(e.key))
     {
-      store.openLetter(e.key);
+      store.openLetter(e.key.toLowerCase());
     }
 
     // Open Guess Where box on space

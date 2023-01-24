@@ -3,10 +3,12 @@
         <!-- <input type="text" class="TryInput form form-control" placeholder="Make a try!" v-model="tryInput" @keydown.enter="makeTry">
 
         <br> -->
-
-        <button :class="['LetterButton', 'btn', !this.openLetters.includes(letter) ? 'btn-primary' : 'btn-secondary']" @click="openLetter(letter)"
+        
+        <button :class="['LetterButton', 'btn', !this.openLetters.includes(letter) ? 'btn-success' : 'btn-secondary']" @click="openLetter(letter)"
             :disabled="this.openLetters.includes(letter)"
-            v-for="letter, index in letters">
+            v-for="letter, index in letters"
+            v-if="card.name"
+            >
             {{ letter.toUpperCase() }}
         </button>
         
@@ -51,23 +53,7 @@ export default {
         },
 
         cardWords() {
-            const words = this.card.name.split(" ");
-            const openLetters = this.openLetters;
-
-            words.forEach((word,index) => {
-                const letters = word.split("");
-
-                letters.forEach((letter,index) => {
-                    letters[index] = {
-                        letter: letter,
-                        opened: (this.openLetters.includes(letter.toLowerCase()) || this.guessed || !this.letters.includes(letter.toLowerCase()))
-                    }
-                });
-
-                words[index] = letters;
-            });
-
-            return words;
+            return store.cardWords;
         },
 
         cardImage() {
