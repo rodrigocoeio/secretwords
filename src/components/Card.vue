@@ -1,14 +1,14 @@
 <template>
     <div class="CardBox">
-        <input type="text" class="TryInput form form-control" placeholder="Make a try!" v-model="tryInput" @keydown.enter="makeTry">
+        <!-- <input type="text" class="TryInput form form-control" placeholder="Make a try!" v-model="tryInput" @keydown.enter="makeTry">
 
-        <br>
+        <br> -->
 
-        <button class="LetterButton btn btn-primary" @click="openLetter(letter)"
-            v-show="!openLetters.includes(letter.toLowerCase()) && !guessed"
+        <button :class="['LetterButton', 'btn', !this.openLetters.includes(letter) ? 'btn-primary' : 'btn-secondary']" @click="openLetter(letter)"
+            :disabled="this.openLetters.includes(letter)"
             v-for="letter, index in letters">
             {{ letter.toUpperCase() }}
-        </button>      
+        </button>
         
         <hr>
 
@@ -60,7 +60,7 @@ export default {
                 letters.forEach((letter,index) => {
                     letters[index] = {
                         letter: letter,
-                        opened: (this.openLetters.includes(letter.toLowerCase()) || this.guessed)
+                        opened: (this.openLetters.includes(letter.toLowerCase()) || this.guessed || !this.letters.includes(letter.toLowerCase()))
                     }
                 });
 
@@ -90,9 +90,7 @@ export default {
         },
 
         openLetter(letter) {
-            playAudio("/audios/letters/" + letter.toLowerCase() +".mp3");
-
-            store.game.openLetters.push(letter.toLowerCase());
+            store.openLetter(letter);
         },
 
         openCard() {
@@ -112,13 +110,23 @@ export default {
     margin: auto;
 }
 
+.Word {
+    width: auto;
+    margin: auto 0;
+    float: left;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
 .LetterBox {
     font-size:36px;
-    margin: 15px;
+    margin: 5px;
     border: 1px solid gray;
     text-align: center;
     width: 50px;
     display: inline-block;
+    min-width: 50px;
+    min-height: 57px;
 }
 .Letter {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -129,14 +137,14 @@ export default {
     height: 100%;
 }
 
-.Word {
-    clear: both;
-    width: auto;
-    margin: auto 0;
-}
-
 
 .LetterButton {
     margin-right: 5px;
+    font-size: 24px;
+    font-weight:bold;
+    min-width: 40px;
+    padding: 0px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 </style>

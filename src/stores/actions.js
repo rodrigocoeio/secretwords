@@ -11,7 +11,8 @@ export default {
     }
 
     this.game.started = true;
-    this.game.opened = false;
+    this.game.openLetters = [];
+    this.game.guessed = false;
     this.game.cardIndex = 0;
   },
 
@@ -92,6 +93,13 @@ export default {
     this.game.opened = true;
 
     this.playCard();
+  },
+
+  openLetter(letter) {
+    playAudio("/audios/letters/" + letter.toLowerCase() + ".mp3");
+
+    if(!this.game.openLetters.includes(letter.toLowerCase()))
+      this.game.openLetters.push(letter.toLowerCase());
   },
 
   playCard() {

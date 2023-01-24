@@ -140,9 +140,14 @@ const getCard = (content, parent) => {
   if (content.extension == "txt") {
     const cardName = formatCardName(content.name);
 
+    const cardFileText = fs.readFileSync(content.fullPath, {
+      encoding: "utf8",
+      flag: "r",
+    });
+
     return {
       type: "card",
-      name: cardName,
+      name: cardFileText!="" ? cardFileText : cardName,
       category: parent.name,
       parent: content.parent,
     };
