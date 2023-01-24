@@ -1,6 +1,6 @@
 */categories.json
-/src/store/categories.json
-src/store/categories.json
+/src/stores/categories.json
+src/stores/categories.json
 
 # Logs
 logs
