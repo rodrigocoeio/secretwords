@@ -9,7 +9,8 @@ export default {
     guessed: false,
     cardIndex: 0,
     cardSorting: "alpha",
-    typedWord: ""
+    typedWord: "",
+    audio: false
   },
 
   categories

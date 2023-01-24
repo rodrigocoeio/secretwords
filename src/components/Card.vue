@@ -14,14 +14,13 @@
         
         <hr>
 
-        <div class="Word" v-for="word in cardWords">
+        <div class="Word" v-for="word in cardWords" @click="playCard">
             <span class="LetterBox" v-for="letter in word">
                 <span class="LetterCover" v-if="!letter.opened">?</span>
                 <span class="Letter" v-if="letter.opened">{{  letter.letter }}</span>
             </span>
             <div style="clear:both;"></div>
         </div>
-
     </div>
 </template>
 
@@ -36,6 +35,10 @@ export default {
     },
 
     computed: {
+        isAllLettersOpened() {
+            return store.isAllLettersOpened;
+        },
+
         guessed() {
             return store.game.guessed;
         },
@@ -84,6 +87,7 @@ export default {
         },
 
         playCard() {
+            console.log("play card");
             return store.playCard();
         }
     }

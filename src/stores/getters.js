@@ -33,7 +33,7 @@ export default {
           letter: wordLetter,
           opened:
             openLetters.includes(wordLetter.toLowerCase()) || // if letter is already chosed/opened
-            !letters.includes(wordLetter.toLowerCase()),      // if the char is not a letter
+            !letters.includes(wordLetter.toLowerCase()), // if the char is not a letter
         };
       });
 
@@ -45,5 +45,17 @@ export default {
 
   cardsNumber() {
     return this.currentCategory ? this.currentCategory.cards.length : 0;
+  },
+
+  isAllLettersOpened() {
+    let allOpened = true;
+
+    this.cardWords.forEach((word) => {
+      word.forEach((letter) => {
+        if (!letter.opened) allOpened = false;
+      });
+    });
+
+    return allOpened;
   },
 };

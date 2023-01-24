@@ -145,11 +145,14 @@ const getCard = (content, parent) => {
       flag: "r",
     });
 
+    const cardAudio = findCardFile(content.name, parent, "mp3") || findCardFile(content.name, parent, "mpeg");
+
     return {
       type: "card",
       name: cardFileText!="" ? cardFileText : cardName,
       category: parent.name,
       parent: content.parent,
+      audio: cardAudio
     };
   }
 

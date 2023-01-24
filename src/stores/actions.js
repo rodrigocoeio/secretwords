@@ -47,38 +47,6 @@ export default {
     }
   },
 
-  playTip(tip) {
-    if (this.game.audio) {
-      this.game.audio.pause();
-      this.game.audio = false;
-    }
-
-    const store = this;
-    const audioFile = "/cards/" + this.currentCategory.name + "/" + tip;
-
-    this.game.audio = playAudio(audioFile);
-    this.game.audio.onended = function () {
-      store.game.audio = false;
-      store.game.tipsPlayed[tip] = true;
-    };
-  },
-
-  playNextTip() {
-    const card = this.card;
-    const store = this;
-
-    if (card) {
-      card.tips.every((tip) => {
-        if (!this.game.tipsPlayed[tip]) {
-          store.playTip(tip);
-          return false;
-        }
-
-        return true;
-      });
-    }
-  },
-
   openCard() {
     this.game.opened = true;
 
@@ -116,7 +84,9 @@ export default {
       this.game.audio = false;
     }
 
-    if (!this.card.audio) return false;
+    console.log(this.card.audio);
+
+    if (!this.card.audio || !this.isAllLettersOpened) return false;
 
     const store = this;
     const audioFile =
