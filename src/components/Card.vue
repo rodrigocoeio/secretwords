@@ -120,17 +120,17 @@ export default {
     float: left;
     margin-left: 20px;
     margin-right: 20px;
+    margin-bottom: 20px;
 }
 
 .LetterBox {
-    font-size:36px;
+    font-size:48px;
     margin: 5px;
     border: 1px solid gray;
     text-align: center;
-    width: 50px;
     display: inline-block;
-    min-width: 50px;
-    min-height: 57px;
+    min-width: 77px;
+    min-height: 77px;
 }
 .Letter {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
