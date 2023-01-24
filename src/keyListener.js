@@ -2,7 +2,7 @@ import store from "$/store";
 
 const listenKeyBoardEvents = function (e) {
   if (store.game.started) {
-    if(!$('#typeWordInput').is(':focus') && store.game.letters.includes(e.key))
+    if(!$('#typeWordInput').is(':focus') && store.game.letters.includes(e.key.toLowerCase()))
     {
       store.openLetter(e.key.toLowerCase());
     }
