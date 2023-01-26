@@ -150,7 +150,7 @@ const getCard = (content, parent) => {
     return {
       type: "card",
       name: cardFileText!="" ? cardFileText : cardName,
-      category: parent.name,
+      category: parent ? parent.name : '',
       parent: content.parent,
       audio: cardAudio
     };
