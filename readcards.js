@@ -140,16 +140,21 @@ const getCard = (content, parent) => {
   if (content.extension == "txt") {
     const cardName = formatCardName(content.name);
 
-    const cardFileText = fs.readFileSync(content.fullPath, {
+    let cardFileText = fs.readFileSync(content.fullPath, {
       encoding: "utf8",
       flag: "r",
     });
+
+    const cardFileTextLines = cardFileText.split("\n");
+    if (cardFileTextLines.length > 1) {
+      cardFileText = cardFileTextLines[0];
+    }
 
     const cardAudio = findCardFile(content.name, parent, "mp3") || findCardFile(content.name, parent, "mpeg");
 
     return {
       type: "card",
-      name: cardFileText!="" ? cardFileText : cardName,
+      name: cardFileText!="" ? formatCardName(cardFileText) : cardName,
       category: parent ? parent.name : '',
       parent: content.parent,
       audio: cardAudio
