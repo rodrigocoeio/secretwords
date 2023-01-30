@@ -10,7 +10,9 @@ export default {
     cardIndex: 0,
     cardSorting: "alpha",
     typedWord: "",
-    audio: false
+    audio: false,
+    letterAudio: false,
+    winningAudio: false
   },
 
   categories

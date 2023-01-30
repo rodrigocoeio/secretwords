@@ -17,7 +17,7 @@
         <div class="Word" v-for="word in cardWords" @click="playCard">
             <span class="LetterBox" v-for="letter in word">
                 <span class="LetterCover" v-if="!letter.opened">?</span>
-                <span class="Letter" v-if="letter.opened">{{  letter.letter }}</span>
+                <span :class="['Letter', isAllLettersOpened ? 'Opened' : '']" v-if="letter.opened">{{  letter.letter }}</span>
             </span>
             <div style="clear:both;"></div>
         </div>
@@ -129,6 +129,10 @@ export default {
     display: inline-block;
     width: 100%;
     height: 100%;
+}
+
+.Letter.Opened {
+    background-color: greenyellow;
 }
 
 
