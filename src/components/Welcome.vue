@@ -1,6 +1,6 @@
 <template>
   <main>
-    <img src="images/secretwords.png" class="Logo">
+    <img src="/images/secretwords.png" class="Logo">
 
     <br><br>
 

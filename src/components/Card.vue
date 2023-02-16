@@ -126,9 +126,9 @@ export default {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-weight: bold;
     background-color: gainsboro;
-    display: inline-block;
+    display: block;
     width: 100%;
-    height: 100%;
+    height: 75px;
 }
 
 .Letter.Opened {
