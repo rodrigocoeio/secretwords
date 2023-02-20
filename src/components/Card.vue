@@ -5,7 +5,7 @@
         <br> -->
         
         <button :class="['LetterButton', 'btn', !this.openLetters.includes(letter) ? 'btn-success' : 'btn-secondary']" @click="openLetter(letter)"
-            :disabled="this.openLetters.includes(letter)"
+            :disabled="this.openLetters.includes(letter) || isAllLettersOpened"
             v-for="letter, index in letters"
             v-if="card.name"
             >
@@ -132,6 +132,7 @@ export default {
 }
 
 .Letter.Opened {
+    cursor: pointer;
     background-color: greenyellow;
 }
 

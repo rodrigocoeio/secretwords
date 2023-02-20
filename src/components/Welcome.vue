@@ -11,7 +11,7 @@
 
     <category-select :categories="categories"></category-select>
 
-    <button class="btn btn-primary" @click="startGame">Start Game</button>
+    <button class="btn btn-primary" @click="startGame" :disabled="loadingWords">Start Game</button>
 
   </main>
 </template>
@@ -30,6 +30,9 @@ export default {
   computed: {
     categories() {
       return store.categories;
+    },
+    loadingWords() {
+      return store.game.loadingWords;
     }
   },
 
@@ -61,8 +64,8 @@ main {
 }
 
 select {
-    max-width: 200px;
-    margin: auto;
-    margin-bottom: 15px;
+  max-width: 200px;
+  margin: auto;
+  margin-bottom: 15px;
 }
 </style>

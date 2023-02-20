@@ -12,7 +12,9 @@ export default {
     typedWord: "",
     audio: false,
     letterAudio: false,
-    winningAudio: false
+    winningAudio: false,
+    loadingWords: false,
+    textToSpeach: {}
   },
 
   categories

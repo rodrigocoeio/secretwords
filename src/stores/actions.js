@@ -1,3 +1,6 @@
+import getWords from "./getWords";
+import textToSpeach from "./textToSpeach";
+
 export default {
   startGame() {
     this.game.started = true;
@@ -26,6 +29,23 @@ export default {
 
       this.game.category = category;
     }
+  },
+
+  async getRandomWordsCategory() {
+    this.game.loadingWords = true;
+    const words = await getWords();
+    this.game.loadingWords = false;
+
+    const randomCategory = {
+      name: "Random Words",
+      cards: words.map((word) => ({
+        type: "card",
+        name: word,
+        category: "Random Words",
+      })),
+    };
+
+    return randomCategory;
   },
 
   nextCard() {
@@ -88,7 +108,7 @@ export default {
 
   playLetterAudio(letter, foundLetter) {
     this.stopAudios();
-    
+
     const audio = foundLetter
       ? playAudio("/audios/letters/" + letter.toLowerCase() + ".mp3")
       : playAudio("/audios/wrong.mpeg");
@@ -110,21 +130,27 @@ export default {
     return audio;
   },
 
-  playCard() {
+  async playCard() {
     this.stopAudios();
 
-    console.log(this.card.audio);
-
-    if (!this.card.audio || !this.isAllLettersOpened) return false;
+    if (!this.isAllLettersOpened) return false;
 
     const store = this;
-    const audioFile =
-      "/cards/" + this.currentCategory.name + "/" + this.card.audio;
+    const audioFile = this.card.audio
+      ? "/cards/" + this.currentCategory.name + "/" + this.card.audio
+      : await this.textToSpeach(this.card.name);
 
     this.game.audio = playAudio(audioFile);
     this.game.audio.onended = function () {
       store.game.audio = false;
     };
+  },
+
+  async textToSpeach(word) {
+    if (!this.game.textToSpeach[word])
+      this.game.textToSpeach[word] = await textToSpeach(this.card.name);
+
+    return this.game.textToSpeach[word];
   },
 
   stopAudios() {
