@@ -1,6 +1,7 @@
 <template>
     <select id="categoryField" ref="select" class="form form-select" v-model="categoryName" @change="selectCategory">
         <option value="0">{{ placeholder }}</option>
+        <option value="random" v-if="!category">Random Words</option>
         <option v-for="category, index in categories" :value="index">{{ category.name }}</option>
     </select>
 
@@ -43,7 +44,13 @@ export default {
     },
 
     methods: {
-        selectCategory() {
+        async selectCategory() {
+            if(this.categoryName=='random'){
+                const randomCategory = await store.getRandomWordsCategory();
+                
+                return store.selectCategory(randomCategory);
+            }
+
             store.selectCategory(this.currentCategory);
         }
     }

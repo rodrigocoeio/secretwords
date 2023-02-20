@@ -5,7 +5,7 @@
         <br> -->
         
         <button :class="['LetterButton', 'btn', !this.openLetters.includes(letter) ? 'btn-success' : 'btn-secondary']" @click="openLetter(letter)"
-            :disabled="this.openLetters.includes(letter)"
+            :disabled="this.openLetters.includes(letter) || isAllLettersOpened"
             v-for="letter, index in letters"
             v-if="card.name"
             >
@@ -126,12 +126,13 @@ export default {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-weight: bold;
     background-color: gainsboro;
-    display: inline-block;
+    display: block;
     width: 100%;
-    height: 100%;
+    height: 75px;
 }
 
 .Letter.Opened {
+    cursor: pointer;
     background-color: greenyellow;
 }
 
