@@ -1,6 +1,7 @@
 */categories.json
 /src/stores/categories.json
 src/stores/categories.json
+/public/cards/*
 
 # Logs
 logs
