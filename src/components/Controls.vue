@@ -162,6 +162,10 @@ button:not([disabled]):hover {
     box-shadow: 3px 3px gray;
 }
 
+button * {
+    vertical-align: middle;
+}
+
 .StartGame {
     margin: auto;
     margin-left: calc(50% - 100px);
