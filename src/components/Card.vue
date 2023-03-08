@@ -94,8 +94,10 @@ export default {
 
 <style scoped>
 .CardBox {
-    padding-left: 100px;
-    padding-right: 100px;
+    padding-left: 40px;
+    padding-right: 40px;
+    margin: auto;
+    max-width: 1280px;
 }
 
 .TryInput {
@@ -113,7 +115,7 @@ export default {
 }
 
 .LetterBox {
-    font-size: 48px;
+    font-size: 62px;
     font-weight: bold;
     margin: 5px;
     border: 2px dashed gainsboro;
@@ -152,6 +154,7 @@ export default {
     padding-left: 5px;
     padding-right: 5px;
     border-radius: 30px;
+    cursor: pointer;
 }
 
 .LetterButton.notOpened {

@@ -61,7 +61,6 @@ export default {
 <style scoped>
 main {
   height: 100%;
-  padding: 15px;
   display: flex;
   place-content: center;
   justify-items: center;
@@ -69,13 +68,14 @@ main {
 }
 
 .Logo {
-  margin-bottom: 30px;
+  margin-bottom: 0px;
 }
 
 h1 {
   text-shadow: gray 3px 1px 1px;
   -webkit-text-stroke: 1px black;
-  margin-bottom: 30px;
+  margin-top: 0px;
+  margin-bottom: 15px;
   font-size: 48px;
   font-weight: bold;
   font-family: Georgia, 'Times New Roman', Times, serif;
