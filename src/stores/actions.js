@@ -3,42 +3,58 @@ import textToSpeach from "./textToSpeach";
 
 export default {
   startGame() {
+    /* if (
+      !this.currentCategory ||
+      !this.currentCategory.cards ||
+      this.currentCategory.cards.length === 0
+    ) {
+      this.game.pleaseSelectCategory = true;
+      return false;
+    } */
+
     this.game.started = true;
     this.game.openLetters = [];
     this.game.guessed = false;
     this.game.cardIndex = 0;
     this.game.typedWord = "";
+
+    if (this.game.category)
+      this.game.category.cards = this.shuffleCards(this.game.category.cards);
   },
 
   quitGame() {
     this.game.started = false;
-    this.game.category = false;
   },
 
   async loadCategories() {
     try {
-      const categoriesJson = await fetch('/categories.json');
+      const categoriesJson = await fetch("/categories.json");
       this.categories = await categoriesJson.json();
-    }
-    catch(e) {
+    } catch (e) {
       //console.error('Failed loading categories.json!');
-    }    
+    }
   },
 
   selectCategory(category) {
     if (category && category.cards) {
-      switch (this.game.cardSorting) {
-        case "alpha":
-          category.cards = sortByKey(category.cards, "name", "asc");
-          break;
-
-        case "shuffle":
-          category.cards = shuffleArray(category.cards);
-          break;
-      }
-
+      category.cards = this.shuffleCards(category.cards);
+      this.game.pleaseSelectCategory = false;
       this.game.category = category;
     }
+  },
+
+  shuffleCards(cards) {
+    switch (this.game.cardSorting) {
+      case "alpha":
+        cards = sortByKey(cards, "name", "asc");
+        break;
+
+      case "shuffle":
+        cards = shuffleArray(cards);
+        break;
+    }
+
+    return cards;
   },
 
   async getRandomWordsCategory() {
