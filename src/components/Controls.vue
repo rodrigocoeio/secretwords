@@ -189,7 +189,6 @@ button * {
     font-size: 24px;
     font-weight: bolder;
     padding-right: 15px;
-    width: 300px;
     height: 30px;
 }
 
