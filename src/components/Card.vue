@@ -146,13 +146,13 @@ export default {
 
 
 .LetterButton {
-    margin-right: 5px;
+    margin-right: 3px;
     font-size: 24px;
     font-weight: bold;
     min-width: 40px;
-    padding: 0px;
-    padding-left: 5px;
-    padding-right: 5px;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
     border-radius: 30px;
     cursor: pointer;
 }
