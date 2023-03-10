@@ -1,5 +1,3 @@
-import categories from "$/categories.js";
-
 export default {
   game: {
     started: false,
@@ -17,5 +15,5 @@ export default {
     textToSpeach: {}
   },
 
-  categories
+  categories: []
 };
