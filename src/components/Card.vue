@@ -123,7 +123,7 @@ export default {
     text-align: center;
     display: inline-block;
     min-width: 77px;
-    min-height: 85px;
+    min-height: 84px;
     box-sizing: border-box;
     border-radius: 15px;
     overflow: hidden;
