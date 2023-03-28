@@ -1,0 +1,6 @@
+*
+!.gitignore
+!/fruits
+!/fruits/*
+!/objects
+!/objects/*
